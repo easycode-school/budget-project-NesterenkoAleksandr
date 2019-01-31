@@ -1,16 +1,16 @@
      
-<div class="budget__value">{{ total | currency }}</div>
+<div class="budget__value">{{ dataService.totalSum | currency }}</div>
 
 <div class="budget__income clearfix">
     <div class="budget__income--text">Income</div>
     <div class="right">
-        <div class="budget__income--value">+ {{ incomeSum | currency }}</div>
+        <div class="budget__income--value">+ {{ dataService.incomeSum | currency }}</div>
     </div>
 </div>
 
 <div class="budget__expenses clearfix">
     <div class="budget__expenses--text">Expenses</div>
     <div class="right clearfix">
-        <div class="budget__expenses--value">- {{ expenseSum | currency }}</div>
+        <div class="budget__expenses--value">- {{ dataService.expenseSum | currency }}</div>
     </div>
 </div>

@@ -1,6 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IBudgetItem } from '../../shared/budget-item';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-add-form',
@@ -8,10 +9,6 @@ import { IBudgetItem } from '../../shared/budget-item';
   styleUrls: ['./add-form.component.css']
 })
 export class AddFormComponent implements OnInit {
-  /**
-   * Событие "Данные о доходе/расходе добавлены"
-   */
-  @Output() itemAdded = new EventEmitter();
 
   @ViewChild('addForm') form: NgForm;
 
@@ -24,7 +21,7 @@ export class AddFormComponent implements OnInit {
     value: 0
   };
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
   }
@@ -39,7 +36,7 @@ export class AddFormComponent implements OnInit {
     }
 
     // Инициация события "Операция добавлена"
-    this.itemAdded.emit(Object.assign({}, this.item));
+    this.dataService.addItem(Object.assign({}, this.item));
 
     // Очистить поля
     this.item.description = null;

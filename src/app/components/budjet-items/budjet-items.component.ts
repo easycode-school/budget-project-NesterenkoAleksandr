@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { IBudgetItem } from '../../shared/budget-item';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-budjet-items',
@@ -7,17 +8,8 @@ import { IBudgetItem } from '../../shared/budget-item';
   styleUrls: ['./budjet-items.component.css']
 })
 export class BudjetItemsComponent implements OnInit {
-  /**
-   * Событие "Удалить данные о доходе/расходе"
-   */
-  @Output() deleteItem = new EventEmitter();
 
-  /**
-   * Хранилище данных о доходе/расходе
-   */
-  @Input() items: IBudgetItem[];
-
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
   }
@@ -28,6 +20,6 @@ export class BudjetItemsComponent implements OnInit {
    */
   public onDeleteItem(item: IBudgetItem): void {
     // Инициация события "Удалить данные о доходе/расходе"
-    this.deleteItem.emit(item);
+    this.dataService.deleteItem(item);
   }
 }
