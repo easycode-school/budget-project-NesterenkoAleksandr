@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { IBudgetItem } from '../../shared/budget-item';
 
 @Component({
   selector: 'app-budjet-summary',
@@ -6,12 +7,29 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./budjet-summary.component.css']
 })
 export class BudjetSummaryComponent implements OnInit {
-  /**
-   * Период
-   */
-  public budgetDate = new Date();
 
-  @Input() items: [];
+  @Input() items: IBudgetItem[];
+
+  /**
+   * Сумма доходов
+   */
+  public get incomeSum(): number {
+    return this.getItemsSum(this.items, 'income');
+  }
+
+  /**
+   * Сумма расходов
+   */
+  public get expenseSum(): number {
+    return this.getItemsSum(this.items, 'expense');
+  }
+
+  /**
+   * Итоговая сумма
+   */
+  public get total(): number {
+    return this.incomeSum - this.expenseSum;
+  }
 
   constructor() { }
 
@@ -24,7 +42,7 @@ export class BudjetSummaryComponent implements OnInit {
    * @param type - вид ('income', 'expense')
    * @return сумма дохода/расхода за период
    */
-  getItemsSum (items, type: string) {
-    return items.reduce((res, item) => res + (item.type === type ? item.value : 0), 0);
+  public getItemsSum (items: Array<IBudgetItem>, type: string): number {
+    return items.reduce((res: number, item: IBudgetItem) => res + (item.type === type ? item.value : 0), 0);
   }
 }

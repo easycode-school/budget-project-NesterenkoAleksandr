@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { IBudgetItem } from '../../shared/budget-item';
 
 @Component({
   selector: 'app-budjet-items',
@@ -14,7 +15,7 @@ export class BudjetItemsComponent implements OnInit {
   /**
    * Хранилище данных о доходе/расходе
    */
-  @Input() items: [];
+  @Input() items: IBudgetItem[];
 
   constructor() { }
 
@@ -23,8 +24,9 @@ export class BudjetItemsComponent implements OnInit {
 
   /**
    * Обработчик события "DeleteItem"
+   * @param item - строка дохода/расхода
    */
-  onDeleteItem(item) {
+  public onDeleteItem(item: IBudgetItem): void {
     // Инициация события "Удалить данные о доходе/расходе"
     this.deleteItem.emit(item);
   }

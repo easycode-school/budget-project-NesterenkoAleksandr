@@ -1,6 +1,12 @@
 <div class="top">
-    <app-budjet-summary [items]="items"></app-budjet-summary>
-</div>
+    <div class="budget">
+        <div class="budget__title">
+            Available Budget in <span class="budget__title--month">{{ budgetDate | date:'MMMM yyyy'}}</span>:
+        </div> 
+        
+        <app-budjet-summary [items]="items"></app-budjet-summary>
+    </div>    
+</div>    
 <div class="bottom"> 
     <app-add-form (itemAdded)="onAddItem($event)"></app-add-form> 
     <app-budjet-items (deleteItem)="onDeleteItem($event)" [items]="items"></app-budjet-items>

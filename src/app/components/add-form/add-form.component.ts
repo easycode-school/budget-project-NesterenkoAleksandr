@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { IBudgetItem } from '../../shared/budget-item';
 
 @Component({
   selector: 'app-add-form',
@@ -17,7 +18,7 @@ export class AddFormComponent implements OnInit {
   /**
    * Операция (доход/расход)
    */
-  public item = {
+  public item: IBudgetItem = {
     type: 'income',
     description: '',
     value: 0
@@ -31,7 +32,7 @@ export class AddFormComponent implements OnInit {
   /**
    * Обработчик события "Submit"
    */
-  onSubmit() {
+  public onSubmit(): void {
     // Если форма не прошла валидацию
     if (this.form.invalid) {
       return;
