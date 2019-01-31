@@ -1,0 +1,13 @@
+<div class="add">
+  <div class="add__container">
+    <form (ngSubmit)="onSubmit()" #addForm="ngForm" novalidate>
+      <select [(ngModel)]='item.type' [ngClass]="{'red-focus': selectType.value === 'expense'}" name='type' #selectType class="add__type">
+        <option value="income" selected>+</option>
+        <option value="expense">-</option>
+      </select>
+      <input [(ngModel)]='item.description' name='title' type="text" class="add__description" [ngClass]="{'red-focus': selectType.value==='expense'}" placeholder="Add description" required>
+      <input [(ngModel)]='item.value' name='value' type="number" class="add__value" pattern="^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$" [ngClass]="{'red-focus': selectType.value==='expense'}" placeholder="Value" required>
+      <button [disabled]="addForm.invalid" class="add__btn"><i class="ion-ios-checkmark-outline" [ngClass]="{'red': selectType.value==='expense'}"></i></button>
+    </form>    
+  </div>
+</div>

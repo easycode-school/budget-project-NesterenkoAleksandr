@@ -1,0 +1,34 @@
+<div class="container clearfix">
+  <div class="income">
+      <h2 class="icome__title">Income</h2>  
+      <div class="income__list">
+        <ng-container *ngFor = "let item of items" (deleteItem)="onDeleteItem(item)">
+          <div *ngIf="item.type == 'income'" class="item clearfix">
+            <div class="item__description">{{ item.description }}</div>
+            <div class="right clearfix">
+              <div class="item__value">+ {{ item.value | currency }}</div>
+              <div class="item__delete">
+                <button (click)="onDeleteItem(item)" class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="expenses">
+      <h2 class="expenses__title">Expenses</h2>  
+      <div class="expense__list">
+        <ng-container *ngFor = "let item of items" (deleteItem)="onDeleteItem(item)">
+          <div *ngIf="item.type == 'expense'" class="item clearfix">
+              <div class="item__description">{{ item.description }}</div>
+              <div class="right clearfix">
+                <div class="item__value">- {{ item.value | currency }}</div>
+                <div class="item__delete">
+                  <button (click)="onDeleteItem(item)" class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
+                </div>
+              </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
