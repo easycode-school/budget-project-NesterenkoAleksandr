@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { IBudgetItem } from '../../shared/budget-item';
 import { DataService } from 'src/app/services/data.service';
 
@@ -8,8 +8,12 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./budjet-items.component.css']
 })
 export class BudjetItemsComponent implements OnInit {
+   /**
+   * Вид операции ('income', 'expense')
+   */
+  @Input() public itemsType: string;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {
   }

@@ -38,6 +38,14 @@ export class DataService {
     }
 
     /**
+     * Операции, согласно типу
+     * @param type - вид операции ('income', 'expense')
+     */
+    public getItems(type: string): Array<IBudgetItem> {
+        return this.items.filter(item => item.type === type);
+    }
+
+    /**
      * Удаление дохода/расхода
      * @param item - удаляемая строка
      */

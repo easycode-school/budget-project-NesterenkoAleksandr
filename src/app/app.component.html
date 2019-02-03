@@ -9,5 +9,18 @@
 </div>    
 <div class="bottom"> 
     <app-add-form></app-add-form> 
-    <app-budjet-items></app-budjet-items>
+    <div class="container clearfix">
+        <div class="income">
+            <h2 class="icome__title">Income</h2>  
+            <div class="income__list">
+                <app-budjet-items [itemsType] = "'income'"></app-budjet-items>
+            </div>
+        </div>
+        <div class="expenses">
+            <h2 class="expenses__title">Expenses</h2>  
+            <div class="expense__list">
+                <app-budjet-items [itemsType] = "'expense'"></app-budjet-items>
+            </div>
+        </div>
+    </div>
 </div>
