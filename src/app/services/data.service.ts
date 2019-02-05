@@ -1,33 +1,18 @@
 import { Injectable } from '@angular/core';
 import { IBudgetItem } from '../shared/budget-item';
+import { BehaviorSubject } from 'rxjs';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+  })
 export class DataService {
     /**
      * Строки с данными о расходе/доходе
      */
-    public items: Array<IBudgetItem> = [];
+    private items: Array<IBudgetItem> = [];
 
-    /**
-     * Сумма доходов
-     */
-    public get incomeSum(): number {
-        return this.getItemsSum(this.items, 'income');
-    }
-
-    /**
-     * Сумма расходов
-     */
-    public get expenseSum(): number {
-        return this.getItemsSum(this.items, 'expense');
-    }
-
-    /**
-     * Итоговая сумма
-     */
-    public get totalSum(): number {
-        return this.incomeSum - this.expenseSum;
-    }
+    private _itemsSource = new BehaviorSubject(this.items);
+    public itemsObservableSubject = this._itemsSource.asObservable();
 
     /**
      * Добавление дохода/расхода
@@ -35,6 +20,8 @@ export class DataService {
      */
     public addItem(item: IBudgetItem): void {
         this.items.push(item);
+        // распространяем событие на всех подписчиков и передаем им данные
+        this._itemsSource.next(this.items);
     }
 
     /**
@@ -54,6 +41,8 @@ export class DataService {
 
         if (index > -1) {
             this.items.splice(index, 1);
+            // распространяем событие на всех подписчиков и передаем им данные
+            this._itemsSource.next(this.items);
         }
     }
 
